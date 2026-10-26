@@ -1,0 +1,55 @@
+<%- include('partials/header', { title: 'Overview' }) %>
+
+<section class="stats">
+  <div class="stat"><span><%= books.length %></span>Books</div>
+  <div class="stat"><span><%= authors.length %></span>Authors</div>
+</section>
+
+<section class="card">
+  <div class="card-head">
+    <h2>BOOK</h2>
+    <a class="btn" href="/books/new">+ Add book</a>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Cover</th><th>book_id</th><th>title</th><th>price</th><th>author_id</th></tr></thead>
+      <tbody>
+      <% books.forEach(b => { %>
+        <tr>
+          <td><%- include('partials/thumb', { src: b.cover, label: b.title, round: false }) %></td>
+          <td><%= b.book_id %></td>
+          <td><%= b.title %></td>
+          <td><%= Number(b.price).toFixed(2) %></td>
+          <td><%= b.author_id %></td>
+        </tr>
+      <% }) %>
+      <% if (!books.length) { %><tr><td colspan="5" class="empty">No books yet.</td></tr><% } %>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="card">
+  <div class="card-head">
+    <h2>AUTHOR</h2>
+    <a class="btn" href="/authors/new">+ Add author</a>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Photo</th><th>author_id</th><th>name</th><th>country</th></tr></thead>
+      <tbody>
+      <% authors.forEach(a => { %>
+        <tr>
+          <td><%- include('partials/thumb', { src: a.photo, label: a.name, round: true }) %></td>
+          <td><%= a.author_id %></td>
+          <td><%= a.name %></td>
+          <td><%= a.country || '—' %></td>
+        </tr>
+      <% }) %>
+      <% if (!authors.length) { %><tr><td colspan="4" class="empty">No authors yet.</td></tr><% } %>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

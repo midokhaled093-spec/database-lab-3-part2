@@ -1,0 +1,8 @@
+<%- include('partials/header', { title: 'Error' }) %>
+<section class="card">
+  <h2>Something went wrong</h2>
+  <p class="alert alert-err"><%= error.message %></p>
+  <p class="muted">Check that MySQL is running and that <code>problem2_DDL.sql</code> was run (see README).</p>
+  <a class="btn" href="/">Back home</a>
+</section>
+<%- include('partials/footer') %>

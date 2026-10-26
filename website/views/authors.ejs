@@ -1,0 +1,34 @@
+<%- include('partials/header', { title: 'Authors' }) %>
+
+<section class="card">
+  <div class="card-head">
+    <h2>Authors</h2>
+    <a class="btn" href="/authors/new">+ Add author</a>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Photo</th><th>author_id</th><th>name</th><th>country</th><th></th></tr></thead>
+      <tbody>
+      <% authors.forEach(a => { %>
+        <tr>
+          <td><%- include('partials/thumb', { src: a.photo, label: a.name, round: true }) %></td>
+          <td><%= a.author_id %></td>
+          <td><%= a.name %></td>
+          <td><%= a.country || '—' %></td>
+          <td><div class="actions">
+            <a class="btn btn-sm btn-ghost" href="/authors/<%= a.author_id %>/edit">Edit</a>
+            <form method="post" action="/authors/<%= a.author_id %>/delete"
+                  onsubmit="return confirm('Remove this author? All of their books will be removed too.')">
+              <button class="btn btn-sm btn-danger">Remove</button>
+            </form>
+          </div></td>
+        </tr>
+      <% }) %>
+      <% if (!authors.length) { %><tr><td colspan="5" class="empty">No authors yet.</td></tr><% } %>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">Removing an author also removes all of their books (<code>ON DELETE CASCADE</code>).</p>
+</section>
+
+<%- include('partials/footer') %>

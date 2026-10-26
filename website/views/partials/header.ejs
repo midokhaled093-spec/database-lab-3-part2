@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= typeof title !== 'undefined' ? title + ' · ' : '' %>Library</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/">📚 Library</a>
+  <nav>
+    <a href="/" class="<%= path === '/' ? 'active' : '' %>">Overview</a>
+    <a href="/books" class="<%= path.startsWith('/books') ? 'active' : '' %>">Books</a>
+    <a href="/authors" class="<%= path.startsWith('/authors') ? 'active' : '' %>">Authors</a>
+  </nav>
+</header>
+<main class="container">
+<% if (msg) { %>
+  <div class="alert <%= msgType === 'err' ? 'alert-err' : 'alert-ok' %>"><%= msg %></div>
+<% } %>

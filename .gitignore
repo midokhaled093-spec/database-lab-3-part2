@@ -1,0 +1,6 @@
+node_modules/
+website/public/uploads/books/*
+website/public/uploads/authors/*
+!website/public/uploads/books/.gitkeep
+!website/public/uploads/authors/.gitkeep
+.env

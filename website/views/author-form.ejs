@@ -1,0 +1,29 @@
+<%- include('partials/header', { title: author ? 'Edit author' : 'Add author' }) %>
+
+<section class="card form-card">
+  <h2><%= author ? `Edit author #${author.author_id}` : 'Add an author' %></h2>
+  <form method="post" enctype="multipart/form-data"
+        action="<%= author ? `/authors/${author.author_id}/edit` : '/authors/new' %>">
+    <label>Name
+      <input name="name" required maxlength="100" value="<%= author ? author.name : '' %>">
+    </label>
+    <label>Country
+      <input name="country" maxlength="50" value="<%= author && author.country ? author.country : '' %>">
+    </label>
+    <label>Photo <small class="muted">(optional, max 5 MB)</small>
+      <input name="photo" type="file" accept="image/*">
+    </label>
+    <% if (author && author.photo) { %>
+      <div class="current-img">
+        <img class="thumb round" src="<%= author.photo %>" alt="current photo">
+        <label class="inline"><input type="checkbox" name="remove_photo" value="1"> Remove current photo</label>
+      </div>
+    <% } %>
+    <div class="form-actions">
+      <button class="btn"><%= author ? 'Save changes' : 'Add author' %></button>
+      <a class="btn btn-ghost" href="/authors">Cancel</a>
+    </div>
+  </form>
+</section>
+
+<%- include('partials/footer') %>
